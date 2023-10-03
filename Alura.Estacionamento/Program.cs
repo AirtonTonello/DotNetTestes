@@ -1,7 +1,6 @@
 ﻿using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
 using System;
-using System.Collections.Generic;
 
 namespace Alura.Estacionamento
 {
@@ -9,7 +8,7 @@ namespace Alura.Estacionamento
     {
         // Cria uma lista de objetos do tipo veículos, para armazenar
         // os veículos (automovéis e motos) que estão no estacionamento;
-        static Patio estacionamento = new Patio();         
+        static Patio estacionamento = new Patio();
 
         static void Main(string[] args)
         {
@@ -24,7 +23,7 @@ namespace Alura.Estacionamento
                 Console.Clear();// limpa a tela;
             } while (opcao != "5");
         }
-                
+
         // Métodos de negócios.
         static void MostrarVeiculosEstacionados()
         {
@@ -37,20 +36,20 @@ namespace Alura.Estacionamento
                 Console.WriteLine("Proprietário :{0}", v.Proprietario);
                 Console.WriteLine("Hora de entrada :{0:HH:mm:ss}", v.HoraEntrada);
                 Console.WriteLine("********************************************");
-           }
+            }
             if (estacionamento.Veiculos.Count == 0)
             {
                 Console.WriteLine("Não há veículos estacionados no momento...");
             }
             PressionaTecla();
         }
-        
+
         static void RegistrarSaidaVeiculo()
         {
             Console.Clear();
             Console.WriteLine("Registro de Saída de Veículos");
             Console.Write("Placa: ");
-            string placa = Console.ReadLine();          
+            string placa = Console.ReadLine();
             Console.WriteLine(estacionamento.RegistrarSaidaVeiculo(placa));
             PressionaTecla();
         }
@@ -102,7 +101,7 @@ namespace Alura.Estacionamento
             moto.Acelerar(5);
             moto.Frear(5);
             estacionamento.RegistrarEntradaVeiculo(moto);
-            Console.WriteLine("Motocicleta registrada com sucesso!");            
+            Console.WriteLine("Motocicleta registrada com sucesso!");
             Console.ReadKey();
         }
 
@@ -131,7 +130,7 @@ namespace Alura.Estacionamento
             carro.Acelerar(5);
             carro.Frear(5);
             estacionamento.RegistrarEntradaVeiculo(carro);
-            Console.WriteLine("Automóvel registrado com sucesso!");            
+            Console.WriteLine("Automóvel registrado com sucesso!");
         }
 
         // Monta a interface da aplicação.
@@ -147,14 +146,14 @@ namespace Alura.Estacionamento
             opcao = Console.ReadLine();
             return opcao;
         }
-           
+
         static string MostrarMenu()
         {
             string menu = "Escolha uma opção:\n" +
                             "1 - Registrar Entrada\n" +
                             "2 - Registrar Saída\n" +
                             "3 - Exibir Faturamento\n" +
-                            "4 - Mostrar Veículos Estacionados\n" +                             
+                            "4 - Mostrar Veículos Estacionados\n" +
                             "5 - Sair do Programa \n";
             return menu;
         }
@@ -192,5 +191,5 @@ namespace Alura.Estacionamento
         }
 
     }
-    
+
 }

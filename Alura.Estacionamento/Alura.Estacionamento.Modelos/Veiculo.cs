@@ -9,8 +9,17 @@ namespace Alura.Estacionamento.Modelos
         private string _placa;
         private string _proprietario;
         private TipoVeiculo _tipo;
+        private string _ticket;
 
         //Propriedades   
+
+        public string IdTicket { get; set; }
+
+        public string Ticket
+        {
+            get => _ticket;
+            set => _ticket = value;
+        }
 
         public string Placa
         {
@@ -23,7 +32,7 @@ namespace Alura.Estacionamento.Modelos
                 // Checa se o valor possui pelo menos 8 caracteres
                 if (value.Length != 8)
                 {
-                    throw new FormatException(" A placa deve possuir 8 caracteres");
+                    throw new FormatException("A placa deve possuir 8 caracteres");
                 }
                 for (int i = 0; i < 3; i++)
                 {
@@ -38,7 +47,7 @@ namespace Alura.Estacionamento.Modelos
                 {
                     throw new FormatException("O 4° caractere deve ser um hífen");
                 }
-                //checa se os 3 primeiros caracteres são numeros
+                //checa se os 4 ultimos caracteres são numeros
                 for (int i = 4; i < 8; i++)
                 {
                     if (!char.IsDigit(value[i]))
@@ -62,10 +71,30 @@ namespace Alura.Estacionamento.Modelos
         public double Largura { get; set; }
         public double VelocidadeAtual { get; set; }
         public string Modelo { get; set; }
-        public string Proprietario { get; set; }
+        public string Proprietario
+        {
+            get => _proprietario;
+            set
+            {
+                if (value.Length < 3)
+                    throw new FormatException("Nome do proprietario não pode ser menor do que 3");
+
+                _proprietario = value;
+            }
+        }
         public DateTime HoraEntrada { get; set; }
         public DateTime HoraSaida { get; set; }
-        public TipoVeiculo Tipo { get => _tipo; set => _tipo = value; }
+        public TipoVeiculo Tipo
+        {
+            get => _tipo;
+            set
+            {
+                if (value == null)
+                    _tipo = TipoVeiculo.Automovel;
+                else
+                    _tipo = value;
+            }
+        }
 
         //Métodos
         public void Acelerar(int tempoSeg)
@@ -78,6 +107,15 @@ namespace Alura.Estacionamento.Modelos
             this.VelocidadeAtual -= (tempoSeg * 15);
         }
 
+        public void AlterarDados(Veiculo veiculoAlterado)
+        {
+            this.Proprietario = veiculoAlterado.Proprietario;
+            this.Tipo = veiculoAlterado.Tipo;
+            this.Cor = veiculoAlterado.Cor;
+            this.Modelo = veiculoAlterado.Modelo;
+            this.Placa = veiculoAlterado.Placa;
+        }
+
         //Construtor
         public Veiculo()
         {
@@ -87,6 +125,16 @@ namespace Alura.Estacionamento.Modelos
         public Veiculo(string proprietario)
         {
             Proprietario = proprietario;
+        }
+
+        public override string ToString()
+        {
+            return $"Ficha do Veiculo:\n" +
+                    $"Tipo de Veiculo: {this.Tipo}\n" +
+                    $"Proprietario: {this.Proprietario}\n" +
+                    $"Modelo: {this.Modelo}\n" +
+                    $"Cor: {this.Cor}\n" +
+                    $"Placa: {this.Placa}";
         }
     }
 }
